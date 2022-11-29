@@ -1,0 +1,58 @@
+{
+    "seed": 0,
+    "description": "",
+    "save_location": "output_baseline",
+    "chunk_size": 64000,
+    "n_gpu": 1,
+    "use_cudnn": true,
+    "trainer": {
+        "epochs": 500,
+        "save_checkpoint_interval": 1,
+        "validation_interval": 1,
+        "find_max": false,
+        "z_score": false
+    },
+    "model": {
+        "module": "model.dnn_baseline",
+        "main": "DNN",
+        "args": {}
+    },
+    "loss_function": {
+        "module": "model.loss_SISNR_MSE",
+        "main": "MSE_SISNR",
+        "args": {}
+    },
+    "optimizer": {
+        "lr": 0.0001,
+        "beta1": 0.9,
+        "beta2" : 0.999
+    },
+    "train_dataset": {
+        "module": "dataset.wav_dataset_baseline",
+        "main": "WavDataset",
+        "args": {
+            "clean_dataset": "/DB/RIR_sitec_819/tr_rir_819",
+            "limit": null,
+            "offset": 0
+        }
+    },
+    "validation_dataset": {
+        "module": "dataset.wav_dataset_baseline",
+        "main": "WavDataset",
+        "args": {
+            "clean_dataset":  "/DB/RIR_sitec_819/cv_rir_819",
+            "limit": null,
+            "offset": 0
+        }
+    },
+    "train_dataloader": {
+        "shuffle": true,
+        "num_workers": 2,
+        "batch_size": 16
+    },
+    "validation_dataloader": {
+        "shuffle": true,
+        "num_workers": 2,
+        "batch_size": 16
+    }
+}

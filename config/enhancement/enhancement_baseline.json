@@ -1,0 +1,17 @@
+{
+    "experiments_dir": "./output_baseline/train_baseline_221019_1648",
+    "enhancement_dir": "./output_baseline/train_baseline_221019_1648/plc",
+    "model": {
+        "module": "model.dnn_baseline",
+        "main": "DNN",
+        "args": {}
+    },
+    "dataset": {
+        "module": "dataset.wav_dataset_enhancement_baseline",
+        "main": "WavDataset",
+        "args": {
+            "mixture_dataset": "/DB/RIR_sitec_819/error/5%95%/loss",
+            "limit": 400
+        }
+    }
+}

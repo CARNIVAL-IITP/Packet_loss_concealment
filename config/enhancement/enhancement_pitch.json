@@ -1,0 +1,17 @@
+{
+    "experiments_dir": "./output_pitch/train_pitch_221103_1320_MSE_10SDR",
+    "enhancement_dir": "./output_pitch/train_pitch_221103_1320_MSE_10SDR/plc",
+    "model": {
+        "module": "model.dnn_pitch",
+        "main": "DNN",
+        "args": {}
+    },
+    "dataset": {
+        "module": "dataset.wav_dataset_enhancement_pitch",
+        "main": "WavDataset",
+        "args": {
+            "mixture_dataset": "/DB/RIR_sitec_819/error/15%95%/loss",
+            "limit": 400
+        }
+    }
+}
