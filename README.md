@@ -31,5 +31,6 @@ To do
 ## Training
 
 To train the model run this command:
+				python train.py
 
 you can change settings at config/train/train_*.json
