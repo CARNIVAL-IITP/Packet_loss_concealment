@@ -3,7 +3,7 @@ import json
 import os
 
 parser = argparse.ArgumentParser(description='EHNET')
-parser.add_argument("-C", "--config", default="config/train/train_baseline.json", type=str,
+parser.add_argument("-C", "--config", default="config/train/train.json", type=str,
                     help="Specify the configuration file for training (*.json).")
 parser.add_argument('-D', '--device', default=None, type=str,
                     help="Specify the GPU visible in the experiment, e.g. '1,2,3'.")
