@@ -34,8 +34,10 @@ To train the baseline model run this command:
 ```
 		python train_baseline.py
 ```
+
 To train the model utilizing pitch information, run this command:
 ```
 		python train_pitch.py
 ```
+
 you can change settings at config/train/train_*.json
