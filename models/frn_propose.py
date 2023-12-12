@@ -77,25 +77,10 @@ class PLCModel(pl.LightningModule):
 
         x = x.permute(3, 0, 1, 2).unsqueeze(-1)
         # prev_mag = torch.zeros((B, 1, F, 1), device=x.device)
-        ########### for pretraining start
-        # print('input x shape', x.shape,x) # input x shape torch.Size([257, 32, 2, 160, 1]) T,B,2,F,1
-        # n = randint(0,120)
-        # x[:,:,:,n:n+40,:]=0
-        # print('masked x', n, x)
-        ########### for pretraining end
-        prev_RI = torch.zeros((B, 2, F, 1), device=x.device)
-        # predictor_state = torch.zeros((2, self.predictor.lstm_layers, B, self.predictor.lstm_dim), device=x.device)
-        predictor_state = torch.zeros((2, self.RI_predictor.lstm_layers, B, self.RI_predictor.lstm_dim), device=x.device)
-        mlp_state = torch.zeros((self.encoder.depth, 2, 1, B, self.encoder.dim), device=x.device)
-        result = []
 
-        # self.mag_to_imag_w = nn.Linear(1, 2).to(device=x.device)
-        # self.mag_to_imag_b = nn.Linear(1, 2).to(device=x.device)
-        # print('frnP 0', prev_mag.shape, predictor_state.shape, mlp_state.shape)
-        #frnP 0 torch.Size([32, 1, 160, 1]) torch.Size([2, 1, 32, 512]) torch.Size([4, 2, 1, 32, 384])
         for step in x:
             feat, mlp_state = self.encoder(step, mlp_state)
-            # prev_mag, predictor_state = self.predictor(prev_mag, predictor_state) # 오리지널
+            # prev_mag, predictor_state = self.predictor(prev_mag, predictor_state) 
             prev_RI, predictor_state = self.RI_predictor(prev_RI, predictor_state)
             # print('frnP 1', feat.shape, prev_mag.shape)
             # print('RI', prev_RI.shape) #torch.Size([32, 2, 160, 1])
@@ -119,24 +104,10 @@ class PLCModel(pl.LightningModule):
             # print('real w', real_w.shape, feat.shape)
             #real w torch.Size([32, 160, 1, 2]) torch.Size([32, 2, 160, 1])
 
-            # feat = torch.cat((feat, prev_mag), 1) # 오리지널
+            # feat = torch.cat((feat, prev_mag), 1) 
 
-            feat = self.joiner(feat) # 오리지널
-
-            ####### version 17 start > 2d joiner 대신 차원 하나 없애고 conv1d로 연산
-            # feat = feat.squeeze(3)
-            # feat = self.oned_joiner(feat)
-            # feat = feat.unsqueeze(3)
-            ########### version 17 end
-
-            ########### version 15 start
-            # weight = torch.cat((real_w,imag_w),1)
-            # bias = torch.cat((real_b, imag_b), 1)
-            # feat = feat * weight + bias
-            ############# version 15 end
-
-            # print('real ww', weight.shape, bias.shape, feat.shape)
-            feat = feat + step # 오리지널
+            feat = self.joiner(feat) 
+            feat = feat + step 
             result.append(feat)
             prev_RI = feat
             # prev_mag = torch.linalg.norm(feat, dim=1, ord=1, keepdims=True)  # compute magnitude
