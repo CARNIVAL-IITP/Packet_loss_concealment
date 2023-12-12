@@ -107,7 +107,7 @@ if __name__ == '__main__':
             model.cuda(device=0)
             trainer = pl.Trainer(accelerator='gpu', devices=1, enable_checkpointing=False, logger=False)
             testset = TestLoader() # original
-            #testset = GEN_REAL_TestLoader() # plc clean을 generator해서 lossy 파일들 저장한 다음 real로 여겨서 불러와서 eval 찍으려고/eval은 원래 onthefly 방식의 gen에서만 측정하도록 되어있
+            #testset = GEN_REAL_TestLoader() 
             test_loader = DataLoader(testset, batch_size=1, num_workers=4)
             trainer.test(model, test_loader)
             print('Version', args.version)
@@ -117,9 +117,9 @@ if __name__ == '__main__':
             print('Evaluate with real trace' if masking == 'real' else
                   'Evaluate with generated trace with {:.2f}% packet loss'.format(prob))
 
-        elif args.mode == 'gen_test': # gen lossy data 추가하기 위ㅏㅁ. predictor에서 pred 아닌걸로 concat 바꿔줘야
+        elif args.mode == 'gen_test': 
             model.cuda(device=0)
-            testset = GenTestLoader()  # WSJ gen으로 predict하는거 저장하려고 추가해널봄. dataset에서 testloader output 첫번쨰꺼로만 받게해야함
+            testset = GenTestLoader()  
             test_loader = DataLoader(testset, batch_size=1, num_workers=4)
             trainer = pl.Trainer(accelerator='gpu', devices=1, enable_checkpointing=False, logger=False)
             preds = trainer.predict(model, test_loader, return_predictions=True)
@@ -130,7 +130,7 @@ if __name__ == '__main__':
 
         elif args.mode == 'test':
             model.cuda(device=0)
-            testset = BlindTestLoader(test_dir=CONFIG.TEST.in_dir) # 오리지널
+            testset = BlindTestLoader(test_dir=CONFIG.TEST.in_dir) 
             test_loader = DataLoader(testset, batch_size=1, num_workers=4)
             trainer = pl.Trainer(accelerator='gpu', devices=1, enable_checkpointing=False, logger=False)
             preds = trainer.predict(model, test_loader, return_predictions=True)
