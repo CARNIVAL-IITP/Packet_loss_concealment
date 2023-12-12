@@ -64,5 +64,6 @@ our paper to fully understand each parameter.
     $ python main.py --mode eval --version 0
     ```
 
-
+# Paper
+https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10248056
 
