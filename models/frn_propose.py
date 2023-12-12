@@ -40,16 +40,6 @@ class PLCModel(pl.LightningModule):
         self.stoi = STOI(16000) #48000
         self.pesq = PESQ(16000, 'wb') # origin
 
-        # self.RI_predictor = RI_Predictor(window_size=self.window_size, lstm_dim=self.pred_dim,lstm_layers=self.pred_layers)
-        # pretrained_dict = torch.load('lightning_logs/predictor_RI/checkpoints/frn-epoch=244-val_loss=0.5278.ckpt',map_location='cpu')
-        # model_dict = self.RI_predictor.state_dict()
-        # for name, param in pretrained_dict['state_dict'].items():
-        #     org_name = name.replace('RI_predictor.','')
-        #     if org_name in model_dict:
-        #         model_dict.update(pretrained_dict) # 이렇게 하면 value뿐 아니라 key도 업데이트되네.. encoder.mlp 로 바껴버려 mlp가
-        # model_dict['state_dict'] = {key.replace('RI_predictor.',''): model_dict['state_dict'].pop(key) for key in model_dict['state_dict'].copy().keys()}
-        # self.RI_predictor.load_state_dict(model_dict['state_dict'],strict=False)
-
         if pred_ckpt_path is not None:
             # self.predictor = Predictor.load_from_checkpoint(pred_ckpt_path)
             self.RI_predictor = RI_Predictor.load_from_checkpoint(pred_ckpt_path)
@@ -57,57 +47,18 @@ class PLCModel(pl.LightningModule):
             # self.predictor = Predictor(window_size=self.window_size, lstm_dim=self.pred_dim,
             #                            lstm_layers=self.pred_layers)
             self.RI_predictor = RI_Predictor(window_size=self.window_size, lstm_dim=self.pred_dim, lstm_layers=self.pred_layers)
-        # self.RI_predictor = RI_Predictor(window_size=self.window_size, lstm_dim=self.pred_dim, lstm_layers=self.pred_layers)
 
-        # self.joiner = nn.Sequential(
-        #     nn.Conv2d(3, 48, kernel_size=(9, 1), stride=1, padding=(4, 0), padding_mode='reflect',
-        #               groups=3),
-        #     nn.LeakyReLU(0.2),
-        #     nn.Conv2d(48, 2, kernel_size=1, stride=1, padding=0, groups=2),
-        # ) # 오리지널 > concat해서 3채널을 2개로 바꿈
         self.joiner = nn.Sequential(
             nn.Conv2d(2, 48, kernel_size=(9, 1), stride=1, padding=(4, 0), padding_mode='reflect',
                       groups=2),
             nn.LeakyReLU(0.2),
             nn.Conv2d(48, 2, kernel_size=1, stride=1, padding=0, groups=2),
-        ) # FiLM 컨디셔닝에 맞게 변형한 버전
-        # self.oned_joiner = nn.Sequential(
-        #     nn.Conv1d(2, 48, 3, stride=1, padding=1, groups=2, bias=True, padding_mode='zeros'),
-        #     nn.LeakyReLU(0.2),
-        #     nn.Conv1d(48, 2, 3, stride=1, padding=1, groups=2, bias=True, padding_mode='zeros'),
-        # )
-        # self.mag_to_real_w = nn.Linear(1, 1)
-        # self.mag_to_real_b = nn.Linear(1, 1)
-        # self.mag_to_imag_w = nn.Linear(1, 1)
-        # self.mag_to_imag_b = nn.Linear(1, 1)
+
         self.RI_to_RI_w = nn.Linear(2,2)
         self.RI_to_RI_b = nn.Linear(2, 2)
         self.encoder = Encoder(in_dim=self.window_size, dim=self.enc_in_dim, depth=self.enc_layers,
                                mlp_dim=self.enc_dim) # 오리지널
 
-        # pretrained_dict = torch.load('lightning_logs/version_31/checkpoints/frn-epoch=20-val_loss=0.2857.ckpt',map_location='cpu')
-        # model_dict = self.encoder.state_dict()
-        # # # print('랜덤일걸', model_dict, model_dict.keys()) # ㅇㅇ 랜덤 맞음
-        # # # print('전부인가', pretrained_dict)
-        # for name, param in pretrained_dict['state_dict'].items():
-        # #     # print('0',name)
-        #     org_name = name.replace('encoder.','')
-        #     if org_name in model_dict:
-        #         model_dict.update(pretrained_dict) # 이렇게 하면 value뿐 아니라 key도 업데이트되네.. encoder.mlp 로 바껴버려 mlp가
-        # model_dict['state_dict'] = {key.replace('encoder.',''): model_dict['state_dict'].pop(key) for key in model_dict['state_dict'].copy().keys()}
-        # # print('model dict 업데이트됐나', model_dict['state_dict'], model_dict.keys()) # ㅇㅇ pretrained 불러옴/ 근데 key가 기존 mlp에서 encoder.mlp로 바뀌어버림
-        # # print('이건 어떻게됨?', pretrained_dict) # 랜덤 model dict 빼고 세개가 같음
-        # self.encoder.load_state_dict(model_dict['state_dict'],strict=False)
-        # print('gma',self.encoder.state_dict())
-        # exit()
-
-        # print(Encoder.load_from_checkpoint('lightning_logs/version_29/checkpoints/frn-epoch=123-val_loss=0.2804.ckpt').keys())
-        # self.encoder = Encoder.load_from_checkpoint('lightning_logs/version_29/checkpoints/frn-epoch=123-val_loss=0.2804.ckpt')
-        # for name, param in check.encoder.parameters():
-        #     print('n,p',name,param)
-        # check = torch.load('lightning_logs/version_25/checkpoints/frn-epoch=90-val_loss=0.2806.ckpt')
-        # self.encoder.load_state_dict(check)
-        # self.encoder = Encoder.load_from_checkpoint('lightning_logs/version_25/checkpoints/frn-epoch.ckpt')
 
         self.loss = Loss()
         self.mseloss = nn.MSELoss()
