@@ -62,14 +62,7 @@ def train():
                          pred_dim=CONFIG.MODEL.pred_dim,
                          pred_layers=CONFIG.MODEL.pred_layers,
                          pred_ckpt_path=None)
-        #     model = PLCModel(train_dataset,
-        #                      val_dataset,
-        #                      window_size=CONFIG.DATA.window_size,
-        #                      enc_layers=CONFIG.MODEL.enc_layers,
-        #                      enc_in_dim=CONFIG.MODEL.enc_in_dim,
-        #                      enc_dim=CONFIG.MODEL.enc_dim,
-        #                      pred_dim=CONFIG.MODEL.pred_dim,
-        #                      pred_layers=CONFIG.MODEL.pred_layers)
+
 
     trainer = pl.Trainer(logger=logger,
                          gradient_clip_val=CONFIG.TRAIN.clipping_val,
