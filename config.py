@@ -49,33 +49,29 @@ class CONFIG:
                                       'test_gen': "/DB/plc-challenge/test_lossy.txt",
                                       'test_clean': "/DB/plc-challenge/WSJ/test/wsj_test_clean.txt", }
                     }
-#'test_wsj': "/DB/plc-challenge/WSJ/test/wsj_test_clean.txt",
-# '/DB/plc-challenge/WSJ/test' #'/DB/plc-challenge
+
         assert dataset in data_dir.keys(), 'Unknown dataset.'
-        sr = 16000  #48000 # audio sampling rate
-        audio_chunk_len = 40960 #122880  # size of chunk taken in each audio files
-        window_size = 320  #960 # window size of the STFT operation, equivalent to packet size
-        stride = 160  #480 # stride of the STFT operation
+        sr = 16000  # audio sampling rate
+        audio_chunk_len = 40960  # size of chunk taken in each audio files
+        window_size = 320  # window size of the STFT operation, equivalent to packet size
+        stride = 160  # stride of the STFT operation
 
         class TRAIN:
             packet_sizes = [80, 128, 160, 256, 320, 512]
-            #[256, 512, 768, 960, 1024,1536]  # packet sizes for training. All sizes should be divisible by 'audio_chunk_len'
             transition_probs = ((0.9, 0.1), (0.9, 0.5), (0.5, 0.1), (0.5, 0.5))  # list of trainsition probs for Markow Chain #(0.9, 0.5) 16.7 /(0.5, 0.1) 35.7
 
         class EVAL:
             packet_size = 320  # 20ms
-            transition_probs = [(0.9, 0.1)]  # (0.9, 0.1) ~ 10%; (0.8, 0.2) ~ 20%; (0.6, 0.4) ~ 40% // (0.7, 0,1)~25% (0.7,0.3)~30% (0.5, 0.5)~50%
+            transition_probs = [(0.9, 0.1)]  
             masking = 'real'  # whether using simulation or real traces from Microsoft to generate masks
             assert masking in ['gen', 'real']
-            trace_path = '/DB/plc-challenge/test/blind/lossy_signals' #'/DB/plc-challenge/test/blind/lossy_signals' #'/DB/plc-challenge/WSJ/test/gen/lossy/50%' #  # must be clarified if masking = 'real'
+            trace_path = '/DB/plc-challenge/test/blind/lossy_signals' 
 
     class LOG:
         log_dir = 'lightning_logs'  # checkpoint and log directory
         sample_path = 'audio_samples'  # path to save generated audio samples in evaluation.
 
     class TEST:
-        in_dir = '/DB/plc-challenge/test/blind/lossy_signals' #'/DB/plc-challenge/test/blind/lossy_signals' #'/DB/plc-challenge/WSJ/test/gen/lossy/50%'  # path to test audio inputs
-        out_dir = '/DB/plc-challenge/test/blind/lossy_signals_output' #'/DB/plc-challenge/test/blind/lossy_signals_output' #'/DB/plc-challenge/WSJ/test/gen/baseline/50%'  # path to generated outputs
+        in_dir = 'path'
+        out_dir = 'path' 
 
-        #'/DB/plc-challenge/WSJ/test/gen/proposed_with/10%'
-        # '/DB/plc-challenge/test/blind_set_reference/X_CleanReference'
