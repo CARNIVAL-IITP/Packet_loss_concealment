@@ -1,26 +1,7 @@
 # FRN for PLC system
 
-**Improving performance of real-time full-band blind packet-loss concealment with predictive network - ICASSP 2023**
+**Modified the baseline PLC system "" - WASPAA 2023**
 
-## License and citation
-
-This repository is released under the CC-BY-NC 4.0. license as found in the LICENSE file.
-
-If you use our software, please cite as below.
-For future queries, please contact [anh.nguyen@namitech.io](mailto:anh.nguyen@namitech.io).
-
-Copyright © 2022 NAMI TECHNOLOGY JSC, Inc. All rights reserved.
-
-```
-@misc{Nguyen2022ImprovingPO,
-  title={Improving performance of real-time full-band blind packet-loss concealment with predictive network},
-  author={Viet-Anh Nguyen and Anh H. T. Nguyen and Andy W. H. Khong},
-  year={2022},
-  eprint={2211.04071},
-  archivePrefix={arXiv},
-  primaryClass={cs.LG}
-}
-```
 
 # 1. Results
 
