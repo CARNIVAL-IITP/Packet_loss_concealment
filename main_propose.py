@@ -39,8 +39,6 @@ def resume(train_dataset, val_dataset, version):
                                                val_dataset=val_dataset,
                                                window_size=CONFIG.DATA.window_size,
                                                pred_ckpt_path=None)
-    # print('checkpoint',checkpoint)
-
     return checkpoint
 
 
@@ -63,65 +61,7 @@ def train():
                          pred_dim=CONFIG.MODEL.pred_dim,
                          pred_layers=CONFIG.MODEL.pred_layers,
                          pred_ckpt_path=None)
-        # pretrain_model = PLCModel.load_from_checkpoint('lightning_logs/version_29/checkpoints/frn-epoch=123-val_loss=0.2804.ckpt')
-
-        # pretrained_dict = torch.load('lightning_logs/version_25/checkpoints/frn-epoch=90-val_loss=0.2806.ckpt',map_location='cpu')
-        # model_dict = model.state_dict()
-        # # print('전부인가', pretrained_dict['state_dict'])
-        # pretrained_dict['state_dict'] = {key.replace('encoder.', ''): pretrained_dict['state_dict'].pop(key) for key in pretrained_dict['state_dict'].copy().keys()}
-        # # print('바뀌었나', pretrained_dict['state_dict'])
-        # model_dict.update(pretrained_dict)
-        # model.load_state_dict(pretrained_dict,strict=False)
-        # print(PLCModel.encoder)
-        # exit()
-        # check = model.load_from_checkpoint('lightning_logs/version_29/checkpoints/frn-epoch=123-val_loss=0.2804.ckpt')
-        # print(check, type(check))
-        # encoder_dict = check.encoder
-        # print('org dict',encoder_dict, type(encoder_dict))
-        # model.encoder.load_state_dict(encoder_dict)
-        # print('model',model)
-        # pretrained_dict = torch.load('lightning_logs/version_25/checkpoints/frn-epoch=90-val_loss=0.2806.ckpt')
-        # # print(pretrained_dict['state_dict'].keys())
-        # # model.load_state_dict(pretrained_dict.encoder)
-        # # print('model',model)
-        # # model.load_state_dict(pretrained_dict[])
-        # model_dict = model.encoder.state_dict()
-        # # # print('model 1', model_dict)
-        # # print('0',pretrained_dict['state_dict'])
-        # for name, param in pretrained_dict['state_dict'].items():
-        #     # print('0',name)
-        #     name = name.replace('encoder.','')
-        #     if name in model_dict:
-        #         model_dict.update(pretrained_dict)
-        #     # print('1',name)
-        # # print('2',pretrained_dict['state_dict'])
-        # exit()
-
-        # pretrained_dict = {k: v for k, v in pretrained_dict['state_dict'].items() if 'encoder.'+k in model_dict}
-        # model_dict.update(pretrained_dict)
-        # model.load_state_dict(pretrained_dict)
-        # print('pre',pretrained_dict)
-        # print('model', model_dict)
-        # exit()
-        # check = {k: v for k, v in check.items() if k in encoder_dict}
-        # encoder_dict.update(check)
-        # print('new dict',encoder_dict)
-        # print('model',model)
-        # for name, param in check.encoder.parameters():
-        #     print('n,p',name,param)
-        # exit()
-            # model.encoder
-
-        # model.encoder.load_from_checkpoint('lightning_logs/version_29/checkpoints/frn-epoch=123-val_loss=0.2804.ckpt')
-        #     model = PLCModel(train_dataset,
-        #                      val_dataset,
-        #                      window_size=CONFIG.DATA.window_size,
-        #                      enc_layers=CONFIG.MODEL.enc_layers,
-        #                      enc_in_dim=CONFIG.MODEL.enc_in_dim,
-        #                      enc_dim=CONFIG.MODEL.enc_dim,
-        #                      pred_dim=CONFIG.MODEL.pred_dim,
-        #                      pred_layers=CONFIG.MODEL.pred_layers)
-
+      
     trainer = pl.Trainer(logger=logger,
                          gradient_clip_val=CONFIG.TRAIN.clipping_val,
                          gpus=len(gpus),
