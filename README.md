@@ -5,30 +5,11 @@
 
 # 1. Results
 
-Our model achieved a significant gain over baselines. Here, we include the predicted packet loss concealment
-mean-opinion-score (PLCMOS) using Microsoft's [PLCMOS](https://github.com/microsoft/PLC-Challenge/tree/main/PLCMOS)
-service. Please refer to our paper for more benchmarks.
 
-| Model   | PLCMOS    | 
-|---------|-----------|
-| Input   | 3.517     | 
-| tPLC    | 3.463     | 
-| TFGAN   | 3.645     | 
-| **FRN** | **3.655** |
 
-We also provide several audio samples for
-comparison at [github.io](https://crystalsound.github.io/FRN/), and a demo application at [HuggingFace Space](https://huggingface.co/spaces/anhnv125/FRN).
 
 # 2. Installation
 
-## Setup
-
-### Clone the repo
-
-```
-$ git clone https://github.com/Crystalsound/FRN.git
-$ cd FRN
-```
 
 ### Install dependencies
 
@@ -50,29 +31,7 @@ $ cd FRN
 
 # 3. Data preparation
 
-In our paper, we conduct experiments on the [VCTK](https://datashare.ed.ac.uk/handle/10283/3443) dataset.
 
-* Download and extract the datasets:
-    ```
-    $ wget http://www.udialogue.org/download/VCTK-Corpus.tar.gz -O data/vctk/VCTK-Corpus.tar.gz
-    $ tar -zxvf data/vctk/VCTK-Corpus.tar.gz -C data/vctk/ --strip-components=1
-    ```
-
-  After extracting the datasets, your `./data` directory should look like this:
-
-    ```
-    .
-    |--data
-        |--vctk
-            |--wav48
-                |--p225
-                    |--p225_001.wav
-                    ...
-            |--train.txt   
-            |--test.txt
-    ```
-* In order to load the datasets, text files that contain training and testing audio paths are required. We have
-  prepared `train.txt` and `test.txt` files in `./data/vctk` directory.
 
 # 4. Run the code
 
