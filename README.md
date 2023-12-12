@@ -43,7 +43,7 @@ our paper to fully understand each parameter.
 
 ## Training
 
-* Adjust training hyperparameters in `config.py`. We provide the pretrained predictor in `lightning_logs/predictor` as stated in our paper. The FRN model can be trained entirely from scratch and will work as well. In this case, initiate `PLCModel(..., pred_ckpt_path=None)`.
+* Adjust training hyperparameters in `config.py`.
 
 * Run `main.py`:
     ```
@@ -60,8 +60,6 @@ our paper to fully understand each parameter.
     ```
     $ tensorboard --logdir=./lightning_logs --bind_all
     ```
-  ![image.png](https://images.viblo.asia/eb2246f9-2747-43b9-8f78-d6c154144716.png)
-
 ## Evaluation
 
 In our paper, we evaluated with 2 masking methods: simulation using Markov Chain and employing real traces in PLC
@@ -105,16 +103,4 @@ Our implementation currently works with the VCTK dataset but can be easily exten
     ```
   The generated audios are saved to `CONFIG.TEST.out_dir`.
 
-  ## ONNX inferencing
-  We provide ONNX inferencing scripts and the best ONNX model (converted from the best checkpoint)
-  at `lightning_logs/best_model.onnx`.
-    * Convert a checkpoint to an ONNX model:
-        ```
-        python main.py --mode onnx --version 0
-        ```
-      The converted ONNX model will be saved to `lightning_logs/version_0/checkpoints`.
-    * Put test audios in `test_samples` and inference with the converted ONNX model (see `inference_onnx.py` for more
-      details):
-         ```
-        python inference_onnx.py --onnx_path lightning_logs/version_0/frn.onnx
-        ```
+
