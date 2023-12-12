@@ -1,0 +1,103 @@
+predictor (48k, 오리지널) : 원래 모델에 있던 pretrained predictor
+
+version_5 : VCTK 48k로 학습시켜본 것. predictor pretrain 있음. 원래 모델에 있던거. version 있이했나 없이했나
+version_6 : VCTK 48k로 학습시켜본 것. 위랑 같은데 한번 더 학습시킨 모델인듯
+version_11 : PLC challenge (clean만) 16k로 모델 값들 바꿔서 (320, packet size) 학습시켜본 것 150epoch. predictor pretrain 없음
+version_12 : version 11과 모델 모두 같은데 300epoch
+predictor :PLC 챌린지 데이터 클린으로 predictor만 학습해 보려 시도했으나.... L2 loss 썼고.
+
+
+%% =============================Propose
+version_13 : version 11과 맞춰지는데, joiner 없이 magnitude의 weight bias로 결합 시도. --> Joiner는 파라메터 엄청 적구나.... 거의 영향이 없네................
+(magnitude는 1채널이자나, FiLM의 linear에서 2채널로 만들어서 기존 feat에 바로 결합)
+
+version_14: version 13을다시학습... self 함수를 forward 안에 집어넣었더니 inference할때 load를 못하네 ㅠㅠ 바고 ㅠㅠ 왜 거기 넣었지... init으로 빼고 다시 학습...
+
+version_15: magnitude에서 linear 4개 만들어서 (1ch to 1ch) real랑 imag 컨디셔닝 각각함.3.517
+
+version_16: Predictor에서 mag 예측하지말고 real, imag predict 하도록 & joiner 없이 FiLM 컨디셔닝만
+
+version_17: 16에 joiner 추가 , 조이너 conv2d에서 채널수 3이 아니라 2로 바꿔줌. group도 3에서 2로 변경
+
+version_18: version 17에서 joiner를 굳이 2d로 할필요 없지 않나, FILMd으로 결합후 conv 1D > leakyReLU > Conv1D 정도로 하면 파라메터 수 많이 줄이고 괜찮을듯...? nn.Conv1d(2, 48, 3, stride=1, padding=1, groups=2, bias=True, padding_mode='zeros'), 근데 joiner는 파라메터 수가 원래 애초에 작아서 별 의미가 없네.. 줄일거면 perdictor의 파라메터를 줄여야함
+
+======================================================================
+
+스코어가너무 낮아서, 올리기 위한 데이터 튜닝정도의 단계
+version_19: version 17모델을 (film) train_noisy data로 파인튜닝
+version_20: version 11모델을 (오리지널 concat) train_noisy data로 파인튜닝하자
+
+===============frequency 축으로 pretraining 해보기=======================
+(pretrain)version_21: plc 챌린지 clean 데이터로 frequency masking pretraining인데 time 축으로는 loss 안주고. 즉 packet loss는 없음
+            ==> F:160, 0~120 중 랜덤 n 뽑아서 40만큼 0으로 masking함
+
+	Frn 코드에서 mask 씌우지 말고 dataset에서 마스크 씌울걸 그랬나.. 결과 다르려나,,,
+
+version_22: pretrain한 21갸져와서 17 버전 모델로 학습   ==> 53epoch까지 하고 중단 ==> version 17보다 loss 안떨어져서 pretrain 다시 시켜야 할듯 
+
+================================================================================
+(pretrain)version_23: 21이랑 같은 masking으로 pretrain 하는데, multi-resolution loss 쓰지말고 mse loss로 바꾸자. 그 전에, masking 제대로 했는지 확인해봐... 그림 plot 되는거 이상한거 같은데,,, trainingstep으로 masking 위치 바꿈. 이거 안되면 dataset에서 losspass filter 쓰는걸로 가자
+	--> 이것도 별로네,, 우선 mse loss는 더 아닌듯! loss 문제 아닌듯!...
+
+(pretrain)version_24 : 주파수 predict는 sequential 과 상관없다는 생각이 들어서 predictor부분을 빼고 pretrain을 해보면 어떨까. 
+		--> 23이랑 다를거 없어서 중단함
+(pretrain)version_25 : cheby loww pass 통과한 main_propose_Fmasking 실험 >이것도 loss 잘 안떨어지면... f축 masking이 의미가 없는거야..
+		>>  학습잘됨!!근데 123epoch 까지 밖에 학습 안됐음. 수렴해서 괜찮을거 같긴한데..
+
+version_26 : version 25 가지고 pretraining with propose 방법으로. >> 78 epoch에서중단
+
+(pretrain)version_27 : pretrain 다시하는데, dataset tensor 부분 동투대로 바꾸고, encoder 라이트닝으로 바꿔서. mask generator true로 해서 넣자..  >> valid는 잘 떨어지는데 train이 왜 튀지 ㅜㅜ 중단함..
+
+(pretrain)version_28 : version 27에서 라이트닝만 다시 원래 nn 모듈로 바꾸기.
+		>> 27이랑 별반 다르지 않을거 같아서 우선 거의 안돌리고 보류..
+
+ (pretrain)version_29 : version 27에서 encoder 라이트닝 유지하고 mask generator는 빼는걸로.
+
+version_30 : version 29 (Encoder lightning으로 바꾼거)를 못가져오겠어서.. 이전에 인코더 nn.module로 학습해놨던거 가져옴. encoder 부분만 load 함수로 가져와서 finetuning.
+
+(pretrain)version_31 : version 25를 20epoch 까지만 학습시켜볼까. 150은 너무 수렴한거 같아서
+version_32 : version_31 의 encoder만 가져와서 학습
+version_33: version 32 전체 가져와서 학습
+(pretrain)version_34 : BWE task를 mse loss 추가해서 학습해보자.
+version_35 : 34로 프리트레이닝후 파인튜닝 
+(pertrain)version_36 : BWE training 다시. mse loss로만 (bwe 만의 성능이 별로 좋지가 않네. 그래서 파인튜닝해도 성능이 별로인듯. bwe 자체의 성능 끌올해야)
+version_37: 36으로 파인튜님ㄴ
+(pertrain)version_38: 전체학습, 멀티랑 엠에스이 일대일로 써보자..
+(enc_pertrain)version_39 :encoder만 pretrain 시켜볼까 (bwe 학습 자체가 잘 안되는데.. 학습으로 encoder만 multi loss써서..)...
+version_40 : 위에서 학습한 39 (인코더만으로 bwe 학습) 가지고 원래 propose 학습
+
+ ================================================================
+version_41 : predictor pretrain 다시. predictor nn.module로 바꿈 # 150epoch
+predictor2 :위의 41 preditor 300epoch으로 늘려 다시
+ 
+=====================================================================================
+version_42 : version 11인 기본 모델에 predictor 2 이용해서 학습. FRN 베이스라인 다시 구현 with predictor
+version_43 : 위의 42와 마찬가지의 vesrion 17인 모델 / 맞다.. 얘는 위랑 predictor 다르구나.... 다시학습시켜야하네.. RI preditor로
+
+version_44 : masking 방법 2 --> highband 없애고 & masking도 해서, 근데 target으로 clean이 아니라 masking 된 거 받기
+ 
+=====================================================================================
+11/17/40/45/47(11+pretraining)
+(pretrain) 39/44/47(same 39 but for 11)
+
+======== lossy data로도 기본 training 해놓자======================
+version_??: lossy data로 main_propose.py 모델 like version 17 
+version_??: lossy data로 main.py 모델 like version 11
+
+===========lossy 데이터에 clean으로 파인튜닝하면 달라지나=======
+version_??: version 21모델을 clean data로 파인튜닝, 필름
+version_??: version 22모델을 clean data로 파인튜닝, 오리지널
+
+
+
+
+
+
+
+
+
+
+
+
+
+
