@@ -3,13 +3,7 @@
 **Modified the baseline PLC system "Masked Frequency Modeling for Improving Packet Loss Concealment in Speech Transmission Systems" - WASPAA 2023**
 
 
-# 1. Results
-
-
-
-
-# 2. Installation
-
+# 1. Installation
 
 ### Install dependencies
 
@@ -29,11 +23,7 @@
     $ pip install -r requirements.txt 
     ```
 
-# 3. Data preparation
-
-
-
-# 4. Run the code
+# 2. Run the code
 
 ## Configuration
 
@@ -75,32 +65,6 @@ Challenge.
     ```
     $ python main.py --mode eval --version 0
     ```
-  During the evaluation, several output samples are saved to `CONFIG.LOG.sample_path` for sanity testing.
 
-## Configure a new dataset
-
-Our implementation currently works with the VCTK dataset but can be easily extensible to a new one.
-
-* Firstly, you need to prepare `train.txt` and `test.txt`. See `./data/vctk/train.txt` and `./data/vctk/test.txt` for
-  example.
-* Secondly, add a new dictionary to `CONFIG.DATA.data_dir`:
-    ```
-    {
-    'root': 'path/to/data/directory',
-    'train': 'path/to/train.txt',
-    'test': 'path/to/test.txt'
-    }
-    ```
-  **Important:** Make sure each line in `train.txt` and `test.txt` joining with `'root'` is a valid path to its
-  corresponding audio file.
-
-# 5. Audio generation
-
-* In order to generate output audios, you need to modify `CONFIG.TEST.in_dir` to your input directory.
-* Run `main.py`:
-    ```
-    python main.py --mode test --version 0
-    ```
-  The generated audios are saved to `CONFIG.TEST.out_dir`.
 
 
