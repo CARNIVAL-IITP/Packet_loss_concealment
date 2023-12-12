@@ -153,14 +153,11 @@ class PLCModel(pl.LightningModule):
         f_0 = x[:, :, 0:1, :]
         x_in = x[:, :, 1:, :]
 
-        # nb = randint(0,120)
-        # # print('이거 매번 바뀌나', nb)
-        # x_in[:,:,nb:nb+40,:] =0
         pred = self(x_in)
         pred = torch.cat([f_0, pred], dim=2)
-        # loss = self.mseloss(pred, y) # mse
 
-        loss = self.loss(pred, y) # 오리지널
+
+        loss = self.loss(pred, y) 
         self.window = self.window.to(pred.device)
         pred = torch.view_as_complex(pred.permute(0, 2, 3, 1).contiguous())
         pred = torch.istft(pred, self.window_size, self.hop_size, window=self.window)
@@ -205,12 +202,8 @@ class PLCModel(pl.LightningModule):
         if CONFIG.DATA.sr != 16000:
             pred = librosa.resample(pred, orig_sr=48000, target_sr=16000)
             tar_wav = librosa.resample(tar_wav, orig_sr=48000, target_sr=16000, res_type='kaiser_fast')
-        #ret = plcmos.run(pred, tar_wav) # original
         ret = plcmos.run(tar_wav, pred)
-        # print('frn 0', torch.tensor(tar_wav))
-        #pesqq = self.pesq(torch.tensor(pred), torch.tensor(tar_wav)) # origin
-        #pesq = pypesq(fs=CONFIG.DATA.sr, ref=tar_wav,deg=pred,mode='wb')
-        #print('stoi lsd pesq', stoi, lsd)
+
         metrics = {
             "Intrusive": ret[0],
             "Non-intrusive": ret[1],
