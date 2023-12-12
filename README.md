@@ -52,15 +52,7 @@ our paper to fully understand each parameter.
     ```
 ## Evaluation
 
-In our paper, we evaluated with 2 masking methods: simulation using Markov Chain and employing real traces in PLC
-Challenge.
-
-* Get the blind test set with loss traces:
     ```
-    $ wget http://plcchallenge2022pub.blob.core.windows.net/plcchallengearchive/blind.tar.gz
-    $ tar -xvf blind.tar.gz -C test_samples
-    ```
-* Modify `config.py` to change evaluation setup if necessary.
 * Run `main.py` with a version number to be evaluated:
     ```
     $ python main.py --mode eval --version 0
