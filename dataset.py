@@ -91,13 +91,11 @@ class TestLoader(Dataset):
         self.data_list = self.load_txt(txt_list)
         if self.mask == 'real':
             trace_txt = glob.glob(os.path.join(CONFIG.DATA.EVAL.trace_path, '*.txt'))
-            # print('dataset -1',trace_txt)
             trace_txt.sort()
             self.trace_list = [1 - np.array(list(map(int, open(txt, 'r').read().strip('\n').split('\n')))) for txt in
                                trace_txt]
         else:
-            # print('why errer', CONFIG.DATA.EVAL.transition_probs, len(CONFIG.DATA.EVAL.transition_probs))
-            # #()로 되어있으니까 len 2 로 잡혀서 []로 바꿔줌
+
             self.mask_generator = MaskGenerator(is_train=False, probs=CONFIG.DATA.EVAL.transition_probs)
 
         self.sr = CONFIG.DATA.sr
@@ -155,18 +153,6 @@ class GEN_REAL_TestLoader(Dataset):
         self.target_data_list = self.load_txt(txt_list)
         txtt_list = CONFIG.DATA.data_dir[dataset_name]['test_lossy']
         self.lossy_data_list = self.load_txt(txtt_list)
-        # print(self.lossy_data_list[5], self.target_data_list[5])
-        # exit()
-        # if self.mask == 'real':
-        #     trace_txt = glob.glob(os.path.join(CONFIG.DATA.EVAL.trace_path, '*.txt'))
-        #     # print('dataset -1',trace_txt)
-        #     trace_txt.sort()
-        #     self.trace_list = [1 - np.array(list(map(int, open(txt, 'r').read().strip('\n').split('\n')))) for txt in
-        #                        trace_txt]
-        # else:
-        #     # print('why errer', CONFIG.DATA.EVAL.transition_probs, len(CONFIG.DATA.EVAL.transition_probs))
-        #     # #()로 되어있으니까 len 2 로 잡혀서 []로 바꿔줌
-        #     self.mask_generator = MaskGenerator(is_train=False, probs=CONFIG.DATA.EVAL.transition_probs)
 
         self.sr = CONFIG.DATA.sr
         self.stride = CONFIG.DATA.stride
@@ -190,17 +176,9 @@ class GEN_REAL_TestLoader(Dataset):
     def __getitem__(self, index):
         target = load_audio(self.target_data_list[index], sample_rate=self.sr)
         lossy = load_audio(self.lossy_data_list[index], sample_rate=self.sr)
-        # print('dataset 0',self.data_list[index])
         target = target[:, :(target.shape[1] // self.p_size) * self.p_size]
         lossy = lossy[:, :(lossy.shape[1] // self.p_size) * self.p_size]
-        # sig = np.reshape(target, (-1, self.p_size)).copy()
-        # if self.mask == 'real':
-        #     mask = self.trace_list[index % len(self.trace_list)]
-        #     mask = np.repeat(mask, np.ceil(len(sig) / len(mask)), 0)[:len(sig)][:, np.newaxis]
-        # else:
-        #     mask = self.mask_generator.gen_mask(len(sig), seed=index)[:, np.newaxis]
-        # sig *= mask
-        # sig = torch.tensor(sig).reshape(-1)
+
         target = torch.tensor(target).squeeze(0)
         lossy = torch.tensor(lossy).squeeze(0)
         target_wav = target.clone()
@@ -224,8 +202,7 @@ class GenTestLoader(Dataset):
             self.trace_list = [1 - np.array(list(map(int, open(txt, 'r').read().strip('\n').split('\n')))) for txt in
                                trace_txt]
         else:
-            # print('why errer', CONFIG.DATA.EVAL.transition_probs, len(CONFIG.DATA.EVAL.transition_probs))
-            # #()로 되어있으니까 len 2 로 잡혀서 []로 바꿔줌
+
             self.mask_generator = MaskGenerator(is_train=False, probs=CONFIG.DATA.EVAL.transition_probs)
 
         self.sr = CONFIG.DATA.sr
