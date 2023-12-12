@@ -39,18 +39,6 @@ class PLCModel(pl.LightningModule):
         self.stoi = STOI(16000) #48000
         self.pesq = PESQ(16000, 'wb') # origin
 
-        # self.predictor = Predictor(window_size=self.window_size, lstm_dim=self.pred_dim,
-        #                            lstm_layers=self.pred_layers)
-        # pretrained_dict = torch.load('lightning_logs/predictor2/checkpoints/frn-epoch=248-val_loss=1.4120.ckpt',map_location='cpu')
-        # model_dict = self.predictor.state_dict()
-        # for name, param in pretrained_dict['state_dict'].items():
-        #     org_name = name.replace('predictor.','')
-        #     if org_name in model_dict:
-        #         model_dict.update(pretrained_dict) # 이렇게 하면 value뿐 아니라 key도 업데이트되네.. encoder.mlp 로 바껴버려 mlp가
-        # model_dict['state_dict'] = {key.replace('predictor.',''): model_dict['state_dict'].pop(key) for key in model_dict['state_dict'].copy().keys()}
-        # self.predictor.load_state_dict(model_dict['state_dict'],strict=False)
-
-        #
         if pred_ckpt_path is not None:
             self.predictor = Predictor.load_from_checkpoint(pred_ckpt_path)
         else:
