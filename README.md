@@ -1,6 +1,6 @@
 # FRN for PLC system
 
-**Modified the baseline PLC system "" - WASPAA 2023**
+**Modified the baseline PLC system "Masked Frequency Modeling for Improving Packet Loss Concealment in Speech Transmission Systems" - WASPAA 2023**
 
 
 # 1. Results
