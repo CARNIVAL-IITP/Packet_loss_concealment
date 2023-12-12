@@ -55,7 +55,7 @@ class MLPBlock(pl.LightningModule):
             inter, _ = self.inter(x)
         else:
             inter, state = self.inter(x, (state[0], state[1]))
-        # print('mlp 4', x.shape, inter.shape) # state 있네. mlp 4 torch.Size([32, 1, 384]) torch.Size([32, 1, 384])
+        # print('mlp 4', x.shape, inter.shape) 
         x = x + self.gamma_1 * inter
         x = self.post_affine(x)
         x = x + self.gamma_2 * self.ff(x)
@@ -115,7 +115,7 @@ class Encoder(pl.LightningModule):
                 out_states.append(state)
         # print('en 2', x.shape) # en 2 torch.Size([32, 1, 384])
         x = self.affine(x)
-        # print('en 3', x.shape) # en 3 torch.Size([32, 2, 160, 1]) B,C,F,T 인듯 T가 1씩 들어가다니..
+        # print('en 3', x.shape) # en 3 torch.Size([32, 2, 160, 1]) 
         x = x + x_in
         if states is None:
             return x
