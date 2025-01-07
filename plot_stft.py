@@ -16,9 +16,6 @@ input_masked_path2 = '/home/donghyun/Research/audio-super-res/data/vctk/VCTK-Cor
 
 
 
-# masked_wav_name = 'p225_355.wav' 
-# masked_wav_name2 = '0.2.pr.wav'
-
 # input_original_path = '/home/donghyun/Research/audio-super-res/data/vctk/VCTK-Corpus/test_multi/mask_dental/hr_inference2/'
 # input_unmasked_path = '/home/donghyun/Research/audio-super-res/data/vctk/VCTK-Corpus/test_multi/mask_dental/lr_inference2/'
 # input_masked_path = '/home/donghyun/Research/audio-super-res/data/vctk/VCTK-Corpus/test_multi/mask_dental/tfilm_e100/inference2/train2_lpf_notched/'
