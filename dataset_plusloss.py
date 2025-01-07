@@ -190,6 +190,7 @@ class GEN_REAL_TestLoader(Dataset):
         target = torch.stft(target, self.window_size, self.stride, window=self.hann, return_complex=False).permute(2, 0,1)
         lossy = torch.stft(lossy, self.window_size, self.stride, window=self.hann, return_complex=False).permute(2, 0,1)
         return lossy.float(), target.float(), lossy_wav, target_wav
+            
 class GenTestLoader(Dataset):
     def __init__(self):
         dataset_name = CONFIG.DATA.dataset
