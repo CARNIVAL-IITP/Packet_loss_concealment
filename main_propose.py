@@ -70,9 +70,6 @@ def train():
                          )
 
     
-    print(
-        'Dataset: {}, Train files: {}, Val files {}'.format(CONFIG.DATA.dataset, len(train_dataset), len(val_dataset)))
-    trainer.fit(model)
 
 
 def to_onnx(model, onnx_path):
