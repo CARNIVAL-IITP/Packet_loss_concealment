@@ -91,7 +91,7 @@ if __name__ == '__main__':
         train()
     else:
         model = resume(None, None, args.version)
-      
+  
 
         model.eval()
         model.freeze()
