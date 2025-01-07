@@ -54,8 +54,6 @@ def waveform(self, y, y_low, y_recon, epoch):
     self.experiment.flush()
     return
 
-
-
 def stft1():
     fig = plt.figure(figsize=(12, 6))
 
