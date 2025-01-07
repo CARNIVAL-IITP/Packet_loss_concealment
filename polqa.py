@@ -26,7 +26,7 @@ def evaluate_dataset(input_clean_path, input_enhanced_path):
     for lr_file in lr_files:
         lr_file_list.append(input_enhanced_path + lr_file)
   
-    # file_num = len(hr_file_list)
+   
 
     all_files = glob.glob(input_clean_path +"*.wav")
     all_files = natsorted(all_files)
