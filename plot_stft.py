@@ -180,13 +180,6 @@ def stft3():
     plt.ylabel('Frequency (Hz)')
     plt.title('Enhanced')
 
-  
-    
-
-
-    # score = pesq(ref, deg, sr)
-    # print("PESQ Score is: ", score)
-
     # plt.colorbar(format='%+2.0f dB');
     plt.tight_layout()
     #plt.savefig('mel-spectrogram.png')
