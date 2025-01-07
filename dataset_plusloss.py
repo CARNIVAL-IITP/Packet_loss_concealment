@@ -141,6 +141,7 @@ class TestLoader(Dataset):
                             return_complex=False).permute(2, 0, 1)
         sig = torch.stft(sig, self.window_size, self.stride, window=self.hann, return_complex=False).permute(2, 0, 1)
         return sig.float(), target.float(), sig_wav, target_wav
+            
 class GEN_REAL_TestLoader(Dataset):
     def __init__(self):
         dataset_name = CONFIG.DATA.dataset
