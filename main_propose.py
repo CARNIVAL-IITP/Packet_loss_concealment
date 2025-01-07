@@ -105,8 +105,6 @@ if __name__ == '__main__':
             masking = CONFIG.DATA.EVAL.masking
             prob = CONFIG.DATA.EVAL.transition_probs[0]
             loss_percent = (1 - prob[0]) / (2 - prob[0] - prob[1]) * 100
-            print('Evaluate with real trace' if masking == 'real' else
-                  'Evaluate with generated trace with {:.2f}% packet loss'.format(prob))
 
         elif args.mode == 'gen_test': 
             model.cuda(device=0)
