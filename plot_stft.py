@@ -186,10 +186,7 @@ def stft3():
     # stft =length)
     # magnitude = np.abs(stft)
     # log_spectrogram = librosa.amplitude_to_db(magnitude, ref=np.max)
-    # librosa.display.specshow(log_spectrogram, sr=sr, hop_length=hop_length, x_axis='time', y_axis='linear')
-    # plt.xlabel('Time (s)')
-    # plt.ylabel('Frequency (Hz)')
-    # plt.title('Enhanced epoch 50')
+    # librosa.displ
 
     # score = pesq(ref, deg, sr)
     # print("PESQ Score is: ", score)
