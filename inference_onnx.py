@@ -29,8 +29,7 @@ if __name__ == '__main__':
     session = onnxruntime.InferenceSession(path, options)
     input_names = [x.name for x in session.get_inputs()]
     output_names = [x.name for x in session.get_outputs()]
-    print(input_names)
-    print(output_names)
+
 
     audio_files = glob.glob(os.path.join(CONFIG.TEST.in_dir, '*.wav'))
     hann = torch.sqrt(torch.hann_window(window))
