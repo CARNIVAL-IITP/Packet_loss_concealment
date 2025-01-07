@@ -37,8 +37,8 @@ class PLCModel(pl.LightningModule):
         self.pred_layers = pred_layers
         self.train_dataset = train_dataset
         self.val_dataset = val_dataset
-        self.stoi = STOI(16000) #48000
-        self.pesq = PESQ(16000, 'wb') # origin
+        self.stoi = STOI(16000) 
+        self.pesq = PESQ(16000, 'wb') 
 
         if pred_ckpt_path is not None:
             self.RI_predictor = RI_Predictor.load_from_checkpoint(pred_ckpt_path)
@@ -67,9 +67,6 @@ class PLCModel(pl.LightningModule):
         Input: real-imaginary; shape (B, F, T, 2); F = hop_size + 1
         Output: real-imaginary
         """
-        # for i in self.encoder.parameters():
-        #     print(i)
-        # exit()
         B, C, F, T = x.shape
 
         x = x.permute(3, 0, 1, 2).unsqueeze(-1)
