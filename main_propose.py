@@ -94,7 +94,7 @@ if __name__ == '__main__':
         train()
     else:
         model = resume(None, None, args.version)
-        print(model.hparams)
+        
         print(summarize(model))
 
         model.eval()
