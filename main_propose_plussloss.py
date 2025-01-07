@@ -43,7 +43,6 @@ def resume(train_dataset, val_dataset, version):
                                                val_dataset=val_dataset,
                                                window_size=CONFIG.DATA.window_size,
                                                pred_ckpt_path=None)
-    # print('checkpoint',checkpoint)
 
     return checkpoint
 
