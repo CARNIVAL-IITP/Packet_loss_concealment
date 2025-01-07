@@ -141,6 +141,6 @@ if __name__ == '__main__':
                 sf.write(out_path, preds[idx], samplerate=CONFIG.DATA.sr, subtype='PCM_16')
 
         else:
-            onnx_path = 'lightning_logs/0WSJ/version_{}/checkpoints/frn.onnx'.format(str(args.version))
+            onnx_path = 'lightning_logs/WSJ/version_{}/checkpoints/frn.onnx'.format(str(args.version))
             to_onnx(model, onnx_path)
             print('ONNX model saved to', onnx_path)
