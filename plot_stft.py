@@ -213,9 +213,7 @@ input_path = '/home/donghyun2/Research/py_utils/demo/230327/'
 # wav_tfilm_name = 'e50_notched_p225_356.wav'
 # wav_afilm_name = 'e100_notched_p225_356.wav'
 
-# wav_original_name = '0.4.lr.wav'
-# wav_LPF_name = '0.8.lr.wav' 
-# wav_DNNbase_name = '0.4.tfilm.wav'
+# wav_origina
 # wav_DNNupdate_name = '0.8.tfilm.wav'
 # wav_tfilm_name = '0.4.afilm.wav'
 # wav_afilm_name = '0.8.afilm.wav'
