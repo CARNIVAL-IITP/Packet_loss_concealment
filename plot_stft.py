@@ -15,8 +15,7 @@ input_masked_path = '/home/donghyun/Research/TUNet/test/version_7/sample_1/'
 input_masked_path2 = '/home/donghyun/Research/audio-super-res/data/vctk/VCTK-Corpus/test_single/mask_dental/tfilm_e50/'
 
 
-
-# input_masked_path = '/home/donghyun/Research/audio-super-res/data/vctk/VCTK-Corpus/test_multi/mask_dental/tfilm_e100/inference2/train2_lpf_notched/'
+lpf_notched/'
 # input_masked_path2 = '/home/donghyun/Research/audio-super-res/data/vctk/VCTK-Corpus/test_single/mask_dental/tfilm_e50/'
 
 wav_original_name = 'high_rate.wav'
