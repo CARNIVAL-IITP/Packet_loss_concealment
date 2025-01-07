@@ -36,7 +36,7 @@ def plot_waveform_to_numpy(self, y, y_low, y_recon, step):
         ax.set_title(name_list[i])
         waveshow(yy.numpy(), self.sr)
         # plt.imshow(rosa.amplitude_to_db(self.stftmag(yy).numpy(),
-        #                                 ref=np.max, top_db=80.),
+    
       
 
 
