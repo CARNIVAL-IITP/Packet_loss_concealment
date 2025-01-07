@@ -330,7 +330,5 @@ class TrainDataset(Dataset):
         target = torch.stft(target, self.chunk_len, self.stride, window=self.hann,
                             return_complex=False).permute(2, 0, 1).float()
         sig = torch.stft(sig, self.chunk_len, self.stride, window=self.hann, return_complex=False).permute(2, 0, 1).float()
-        # print('4', sig.shape, target.shape)
-        # sig = sig.permute(2, 0, 1).float() # original
-        # print('5', sig.shape, target.shape)
+
         return sig, target
