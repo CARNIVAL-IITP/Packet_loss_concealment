@@ -71,7 +71,6 @@ def train():
 
     
 
-
 def to_onnx(model, onnx_path):
     model.eval()
 
