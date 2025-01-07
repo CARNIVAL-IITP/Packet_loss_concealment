@@ -144,8 +144,6 @@ def stft2():
     # plt.savefig('dental_fabric_stft.jpg')
     plt.show()
 
-
-
 def stft3():
     fig = plt.figure(figsize=(12, 6))
 
