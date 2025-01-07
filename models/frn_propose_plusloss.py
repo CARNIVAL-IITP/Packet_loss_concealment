@@ -42,7 +42,6 @@ class PLCModel(pl.LightningModule):
 
 
         if pred_ckpt_path is not None:
-            # self.predictor = Predictor.load_from_checkpoint(pred_ckpt_path)
             self.RI_predictor = RI_Predictor.load_from_checkpoint(pred_ckpt_path)
         else:
             # self.predictor = Predictor(window_size=self.window_size, lstm_dim=self.pred_dim,
