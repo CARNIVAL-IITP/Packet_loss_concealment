@@ -44,8 +44,7 @@ def plot_waveform_to_numpy(self, y, y_low, y_recon, step):
         #            interpolation='none')
         # plt.colorbar()
         # plt.xlabel('Frames')
-        # plt.ylabel('Channels')
- 
+      
 
     fig.canvas.draw()
     data = self.fig2np(fig)
