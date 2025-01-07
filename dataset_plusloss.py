@@ -313,7 +313,7 @@ class TrainDataset(Dataset):
 
     def __getitem__(self, index):
         sig = self.fetch_audio(index)
-        # print('0',sig.shape)
+      
 
         sig = sig.reshape(-1).astype(np.float32)
        
