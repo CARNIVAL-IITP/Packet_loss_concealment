@@ -85,7 +85,6 @@ def to_onnx(model, onnx_path):
                       do_constant_folding=True,
                       verbose=False)
 
-
 if __name__ == '__main__':
 
     if args.mode == 'train':
