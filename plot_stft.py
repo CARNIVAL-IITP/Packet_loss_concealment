@@ -43,7 +43,7 @@ def plot_waveform_to_numpy(self, y, y_low, y_recon, step):
         #            origin='lower',
         #            interpolation='none')
         # plt.colorbar()
-        # plt.xlabel('Frames')
+      
       
 
     fig.canvas.draw()
