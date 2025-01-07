@@ -183,7 +183,7 @@ def stft3():
   
     
     # deg, sr = librosa.load(wav_masked2, sr=16000)
-    # stft = librosa.stft(y=deg, n_fft=n_fft, hop_length=hop_length)
+    # stft =length)
     # magnitude = np.abs(stft)
     # log_spectrogram = librosa.amplitude_to_db(magnitude, ref=np.max)
     # librosa.display.specshow(log_spectrogram, sr=sr, hop_length=hop_length, x_axis='time', y_axis='linear')
