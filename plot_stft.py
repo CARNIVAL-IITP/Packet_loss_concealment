@@ -10,8 +10,6 @@ import matplotlib.gridspec as gridspec
 # ## Window filepath
 # input_original_path = '/home/utahboy3502/1007MIR/MIR/'
 # input_unmasked_path = '/home/utahboy3502/1007MIR/MIR/output/'
-# input_masked_path = '/home/utahboy3502/1007MIR/MIR/output/masked/'
-
 # wav_original_name = 'test1.wav'
 # unmasked_wav_name = 'unmasked_output.wav'
 # masked_wav_name = 'kf99_output.wav'
