@@ -28,7 +28,6 @@ n_fft = 1024
 wav_original = input_original_path + wav_original_name
 wav_unmasked = input_unmasked_path + unmasked_wav_name
 wav_masked = input_masked_path + masked_wav_name
-# wav_masked2 = input_masked_path2 + masked_wav_name2
 
 def plot_waveform_to_numpy(self, y, y_low, y_recon, step):
     name_list = ['y', 'y_low', 'y_recon']
