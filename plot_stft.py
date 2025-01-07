@@ -18,7 +18,7 @@ input_masked_path2 = '/home/donghyun/Research/audio-super-res/data/vctk/VCTK-Cor
 wav_original_name = 'high_rate.wav'
 unmasked_wav_name = 'low_rate.wav' 
 masked_wav_name = 'recon.wav' 
-# masked_wav_name2 = '0.2.pr.wav'
+
 
 outputpath = '/home/utahboy3502/Progress/Project/IITP/MIR/output/1013/'
 
