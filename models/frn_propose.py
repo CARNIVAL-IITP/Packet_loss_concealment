@@ -114,12 +114,8 @@ class PLCModel(pl.LightningModule):
         f_0 = x_in[:, :, 0:1, :]
         x = x_in[:, :, 1:, :]
 
-        # n = randint(0,120)
-        # # print('이거 매번 바뀌나', n)
-        # x[:,:,n:n+40,:] =0
         x = self(x)
         x = torch.cat([f_0, x], dim=2)
-        # loss = self.mseloss(x, y) # for maksing pretraining
 
         loss = self.loss(x, y) # 오리지널 FRN
         self.log('train_loss', loss, logger=True)
@@ -132,7 +128,6 @@ class PLCModel(pl.LightningModule):
 
         pred = self(x_in)
         pred = torch.cat([f_0, pred], dim=2)
-
 
         loss = self.loss(pred, y) 
         self.window = self.window.to(pred.device)
@@ -189,21 +184,16 @@ class PLCModel(pl.LightningModule):
             'LSD_L': lsd_low,
             'STOI': stoi,
         }
-        # metrics = {
-        #     "Intrusive": ret[0],
-        #     "Non-intrusive": ret[1],
-        #     'LSD': lsd,
-        #     'STOI': stoi,
-        # }
+
         self.log_dict(metrics)
         return metrics
 
     def predict_step(self, batch, batch_idx: int, dataloader_idx: int = 0):
         f_0 = batch[:, :, 0:1, :]
         x = batch[:, :, 1:, :]
-        pred = self(x) # 오리지널
-        pred = torch.cat([f_0, pred], dim=2) # 오리지널
-        # pred = torch.cat([f_0, x], dim=2) #  lossy 파일 뽑아내려고 바꾼거
+        pred = self(x) 
+        pred = torch.cat([f_0, pred], dim=2) 
+        # pred = torch.cat([f_0, x], dim=2) 
         pred = torch.istft(pred.squeeze(0).permute(1, 2, 0), self.window_size, self.hop_size,
                            window=self.window.to(pred.device))
         return pred
