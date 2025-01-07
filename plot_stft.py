@@ -99,7 +99,6 @@ def stft1():
     print("Wave length: {}, Mel_S shape:{}".format(len(y) / sr, np.shape(stft)))
 
     plt.tight_layout()
-    # plt.savefig(outputpath + 'output_stft_plot_.png')
     plt.show()
 
 ## plot waveform top, 3 spectrogram bottom
