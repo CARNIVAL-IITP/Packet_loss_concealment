@@ -68,7 +68,6 @@ class PLCModel(pl.LightningModule):
         B, C, F, T = x.shape
 
         x = x.permute(3, 0, 1, 2).unsqueeze(-1)
-        # prev_mag = torch.zeros((B, 1, F, 1), device=x.device)
 
         for step in x:
             feat, mlp_state = self.encoder(step, mlp_state)
