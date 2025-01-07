@@ -69,7 +69,7 @@ def train():
                          callbacks=[checkpoint_callback]
                          )
 
-    print(model.hparams)
+    
     print(
         'Dataset: {}, Train files: {}, Val files {}'.format(CONFIG.DATA.dataset, len(train_dataset), len(val_dataset)))
     trainer.fit(model)
