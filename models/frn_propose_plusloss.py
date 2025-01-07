@@ -107,7 +107,6 @@ class PLCModel(pl.LightningModule):
         feat, mlp_state = self.encoder(x, mlp_state)
 
         feat = torch.cat((feat, prev_mag), 1)
-        # feat = self.joiner(feat)
         prev_mag = torch.linalg.norm(feat, dim=1, ord=1, keepdims=True)
         feat = feat + x
         return feat, prev_mag, predictor_state, mlp_state
