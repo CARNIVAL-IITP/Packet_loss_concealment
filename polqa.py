@@ -33,8 +33,6 @@ def evaluate_dataset(input_clean_path, input_enhanced_path):
     all_files = natsorted(all_files)
     file_length = len(all_files)
     for i in tqdm(range (800)):
-        # x_hr, fs = sf.read(hr_file_list[i])
-        # pred, fs = sf.read(lr_file_list[i])
         polqa = compute_audio_quality(metrics='POLQA',testFile=lr_file_list[i],refFile=hr_file_list[i])
         print(polqa)
         exit()
