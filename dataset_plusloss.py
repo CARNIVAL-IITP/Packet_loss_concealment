@@ -91,7 +91,7 @@ class TestLoader(Dataset):
         self.data_list = self.load_txt(txt_list)
         if self.mask == 'real':
             trace_txt = glob.glob(os.path.join(CONFIG.DATA.EVAL.trace_path, '*.txt'))
-            # print('dataset -1',trace_txt)
+            
             trace_txt.sort()
             self.trace_list = [1 - np.array(list(map(int, open(txt, 'r').read().strip('\n').split('\n')))) for txt in
                                trace_txt]
@@ -120,7 +120,7 @@ class TestLoader(Dataset):
 
     def __getitem__(self, index):
         target = load_audio(self.data_list[index], sample_rate=self.sr)
-        # print('dataset 0',self.data_list[index])
+       
         target = target[:, :(target.shape[1] // self.p_size) * self.p_size]
 
         sig = np.reshape(target, (-1, self.p_size)).copy()
