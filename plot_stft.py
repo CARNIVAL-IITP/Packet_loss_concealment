@@ -55,7 +55,7 @@ def waveform(self, y, y_low, y_recon, epoch):
     return
 
 
-## plot 3 waveform and spectrogram each
+
 def stft1():
     fig = plt.figure(figsize=(12, 6))
 
