@@ -232,7 +232,6 @@ def stft4():
     print("Wave length: {}, Mel_S shape:{}".format(len(y2) / sr, np.shape(stft)))
     plt.title('Low pass filtered')
 
-    ## KF99
     s3 = fig.add_subplot(2, 3, 2)
     y3, sr = librosa.load(wav_DNNbase, sr=16000)
     # librosa.display.waveplot(y3, sr=sr)
