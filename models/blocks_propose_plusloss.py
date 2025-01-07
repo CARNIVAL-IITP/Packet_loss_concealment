@@ -183,7 +183,6 @@ class RI_Predictor(nn.Module):  # mel
         else:
             return x, torch.stack(state, 0)
 
-
 class AcousticEstimator(torch.nn.Module):
     def __init__(self):
         super(AcousticEstimator, self).__init__()
