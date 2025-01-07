@@ -42,9 +42,6 @@ def plot_waveform_to_numpy(self, y, y_low, y_recon, step):
 
 
 
-      
-      
-
     fig.canvas.draw()
     data = self.fig2np(fig)
 
