@@ -180,7 +180,7 @@ def stft3():
     plt.ylabel('Frequency (Hz)')
     plt.title('Enhanced')
 
-    # s3_w = fig.add_subplot(1, 4, 4)
+  
     
     # deg, sr = librosa.load(wav_masked2, sr=16000)
     # stft = librosa.stft(y=deg, n_fft=n_fft, hop_length=hop_length)
