@@ -83,21 +83,7 @@ class PLCModel(pl.LightningModule):
             RI_b = self.RI_to_RI_b(prev_RI)
             RI_b = RI_b.permute(0, 3, 1, 2)
             feat = feat * RI_w + RI_b
-            # prev_mag = prev_mag.permute(0,2,3,1)
-            # print('print',prev_mag.shape) # print torch.Size([32, 160, 1, 1])
-            # real_w = self.mag_to_real_w(prev_mag)
-            # real_w = real_w.permute(0,3,1,2)
-            # real_b = self.mag_to_real_b(prev_mag)
-            # real_b = real_b.permute(0,3,1,2)
-            # imag_w = self.mag_to_imag_w(prev_mag)
-            # imag_w = imag_w.permute(0,3,1,2)
-            # imag_b = self.mag_to_imag_b(prev_mag)
-            # imag_b = imag_b.permute(0,3,1,2)
-            # print('real w', real_w.shape, feat.shape)
-            #real w torch.Size([32, 160, 1, 2]) torch.Size([32, 2, 160, 1])
-
-            # feat = torch.cat((feat, prev_mag), 1) 
-
+        
             feat = self.joiner(feat) 
             feat = feat + step 
             result.append(feat)
