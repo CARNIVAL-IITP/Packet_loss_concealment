@@ -133,4 +133,4 @@ if __name__ == '__main__':
         else:
             onnx_path = 'lightning_logs/0WSJ/version_{}/checkpoints/frn.onnx'.format(str(args.version))
             to_onnx(model, onnx_path)
-            print('ONNX model saved to', onnx_path)
+         
