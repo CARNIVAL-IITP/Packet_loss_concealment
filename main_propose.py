@@ -105,7 +105,6 @@ if __name__ == '__main__':
             #testset = GEN_REAL_TestLoader() 
             test_loader = DataLoader(testset, batch_size=1, num_workers=4)
             trainer.test(model, test_loader)
-            print('Version', args.version)
             masking = CONFIG.DATA.EVAL.masking
             prob = CONFIG.DATA.EVAL.transition_probs[0]
             loss_percent = (1 - prob[0]) / (2 - prob[0] - prob[1]) * 100
