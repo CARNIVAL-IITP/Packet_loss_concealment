@@ -321,7 +321,7 @@ class TrainDataset(Dataset):
         p_size = random.choice(self.p_sizes)
 
         sig = np.reshape(sig, (-1, p_size))
-        # print('2', sig.shape)
+   
         mask = self.mask_generator.gen_mask(len(sig), seed=index)[:, np.newaxis]
         sig *= mask
         sig = np.reshape(sig, -1) # add
