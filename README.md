@@ -2,7 +2,7 @@
 
 **Modified the baseline PLC system "Masked Frequency Modeling for Improving Packet Loss Concealment in Speech Transmission Systems" - WASPAA 2023**
 
-# 0. Contributions1
+# 0. Contributions
 
 We modified two things.
 1. We used complex features in predictor and using FiLM layer to integrate the outputs of encoder and predictor.
