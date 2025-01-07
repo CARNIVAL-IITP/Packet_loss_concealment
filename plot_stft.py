@@ -201,11 +201,6 @@ def stft3():
     #librosa.display.waveplot(y, sr=sr)
 
 input_path = '/home/donghyun2/Research/py_utils/demo/230327/'
-# ./sample_audio_input/demo_0314/'
-# outputpath = '/home/donghyun2/Research/py_utils/deom
-
-
-# wav_ori
 
 wav_original_name = 'p360_001.wav'
 wav_LPF_name = 'SA1_lr.wav'
