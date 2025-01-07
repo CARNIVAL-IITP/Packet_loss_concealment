@@ -42,7 +42,7 @@ def plot_waveform_to_numpy(self, y, y_low, y_recon, step):
         #            aspect='auto',
         #            origin='lower',
         #            interpolation='none')
-        # plt.colorbar()
+
       
       
 
