@@ -316,7 +316,7 @@ class TrainDataset(Dataset):
         # print('0',sig.shape)
 
         sig = sig.reshape(-1).astype(np.float32)
-        # print('1', sig.shape)
+       
         target = torch.tensor(sig.copy())
         p_size = random.choice(self.p_sizes)
 
