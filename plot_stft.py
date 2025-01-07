@@ -39,7 +39,7 @@ def plot_waveform_to_numpy(self, y, y_low, y_recon, step):
         #                                 ref=np.max, top_db=80.),
         #            # vmin = -20,
         #            vmax=0.,
-        #            aspect='auto',
+
 
 
 
