@@ -221,11 +221,10 @@ class PLCModel(pl.LightningModule):
     def predict_step(self, batch, batch_idx: int, dataloader_idx: int = 0):
         f_0 = batch[:, :, 0:1, :]
         x = batch[:, :, 1:, :]
-        # print('x',length)
-        pred = self(x) # 오리지널
+       
+        pred = self(x) 
 
-        pred = torch.cat([f_0, pred], dim=2) # 오리지널
-        # pred = torch.cat([f_0, x], dim=2) #  lossy 파일 뽑아내려고 바꾼거
+        pred = torch.cat([f_0, pred], dim=2) 
         pred = torch.istft(pred.squeeze(0).permute(1, 2, 0), self.window_size, self.hop_size,
                            window=self.window.to(pred.device))
         return pred
