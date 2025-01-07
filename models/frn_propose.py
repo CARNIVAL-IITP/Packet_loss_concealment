@@ -54,9 +54,7 @@ class PLCModel(pl.LightningModule):
         self.RI_to_RI_w = nn.Linear(2,2)
         self.RI_to_RI_b = nn.Linear(2, 2)
         self.encoder = Encoder(in_dim=self.window_size, dim=self.enc_in_dim, depth=self.enc_layers,
-                               mlp_dim=self.enc_dim) # 오리지널
-
-
+                               mlp_dim=self.enc_dim) 
         self.loss = Loss()
         self.mseloss = nn.MSELoss()
         self.window = torch.sqrt(torch.hann_window(self.window_size))
