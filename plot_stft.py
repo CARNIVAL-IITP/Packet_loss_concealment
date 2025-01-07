@@ -9,7 +9,6 @@ import matplotlib.gridspec as gridspec
 
 # ## Window filepath
 # input_original_path = '/home/utahboy3502/1007MIR/MIR/'
-# input_unmasked_path = '/home/utahboy3502/1007MIR/MIR/output/'
 
 input_original_path = '/home/donghyun/Research/TUNet/test/version_7/sample_1/'
 input_unmasked_path = '/home/donghyun/Research/TUNet/test/version_7/sample_1/'
