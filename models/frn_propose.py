@@ -41,7 +41,6 @@ class PLCModel(pl.LightningModule):
         self.pesq = PESQ(16000, 'wb') # origin
 
         if pred_ckpt_path is not None:
-            # self.predictor = Predictor.load_from_checkpoint(pred_ckpt_path)
             self.RI_predictor = RI_Predictor.load_from_checkpoint(pred_ckpt_path)
         else:
             self.RI_predictor = RI_Predictor(window_size=self.window_size, lstm_dim=self.pred_dim, lstm_layers=self.pred_layers)
