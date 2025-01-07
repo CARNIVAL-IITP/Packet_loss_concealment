@@ -15,7 +15,7 @@ input_masked_path = '/home/donghyun/Research/TUNet/test/version_7/sample_1/'
 input_masked_path2 = '/home/donghyun/Research/audio-super-res/data/vctk/VCTK-Corpus/test_single/mask_dental/tfilm_e50/'
 
 
-# unmasked_wav_name = 'p225_355.wav' 
+
 # masked_wav_name = 'p225_355.wav' 
 # masked_wav_name2 = '0.2.pr.wav'
 
