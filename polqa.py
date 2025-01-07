@@ -35,7 +35,7 @@ def evaluate_dataset(input_clean_path, input_enhanced_path):
     for i in tqdm(range (800)):
         polqa = compute_audio_quality(metrics='POLQA',testFile=lr_file_list[i],refFile=hr_file_list[i])
         print(polqa)
-        exit()
+     
 
 
 if __name__ == "__main__":
