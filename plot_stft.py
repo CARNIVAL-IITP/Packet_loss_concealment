@@ -36,7 +36,6 @@ def plot_waveform_to_numpy(self, y, y_low, y_recon, step):
         ax.set_title(name_list[i])
         waveshow(yy.numpy(), self.sr)
 
-
     fig.canvas.draw()
     data = self.fig2np(fig)
 
