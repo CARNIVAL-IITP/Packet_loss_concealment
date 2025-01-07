@@ -41,5 +41,4 @@ def evaluate_dataset(input_clean_path, input_enhanced_path):
 if __name__ == "__main__":
 
     evaluate_dataset(input_clean_path, input_enhanced_path)
-    
     print("PLCMOS:", np.mean(np.array(results["plcmos_v" + str(args.model_ver)])))
