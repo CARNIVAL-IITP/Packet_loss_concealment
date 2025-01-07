@@ -207,9 +207,6 @@ input_path = '/home/donghyun2/Research/py_utils/demo/230327/'
 # ./sample_audio_input/demo_0314/'
 # outputpath = '/home/donghyun2/Research/py_utils/deom
 
-# wav_LPF_name = 'lr_p225_356.wav'
-# wav_DNNbase_name = 'e10_p225_356.wav'
-# wav_DNNupdate_name = 'e10_notched_p225_356.wav'
 
 # wav_ori
 
