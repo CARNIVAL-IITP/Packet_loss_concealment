@@ -190,7 +190,6 @@ class PLCModel(pl.LightningModule):
         tar_wav = tar_wav.cpu().numpy()
         inp_wav = inp_wav.cpu().numpy()
         pred = pred.detach().cpu().numpy()
-        #lsd, lsd_high, lsd_low = LSD(tar_wav, pred) # original
         lsd, lsd_high, lsd_low = LSD(pred, tar_wav) # original
 
         if batch_idx in [3, 5, 7]:
