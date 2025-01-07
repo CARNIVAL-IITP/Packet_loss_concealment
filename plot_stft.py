@@ -198,7 +198,6 @@ wav_DNNupdate_name = 'SA1_ver102.wav'
 wav_tfilm_name = 'SA1_ver103.wav'
 wav_afilm_name = 'SA1_ver107.wav'
 
-
 sr = 16000
 hop_length = 64
 n_fft = 1024
