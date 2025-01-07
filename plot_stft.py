@@ -17,7 +17,6 @@ wav_original_name = 'high_rate.wav'
 unmasked_wav_name = 'low_rate.wav' 
 masked_wav_name = 'recon.wav' 
 
-
 outputpath = '/home/utahboy3502/Progress/Project/IITP/MIR/output/1013/'
 
 sr = 16000
