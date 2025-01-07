@@ -326,7 +326,6 @@ class TrainDataset(Dataset):
         sig *= mask
         sig = np.reshape(sig, -1) # add
         sig = torch.tensor(sig.copy())
-        # print('3', sig.shape, target.shape)
         target = torch.stft(target, self.chunk_len, self.stride, window=self.hann,
                             return_complex=False).permute(2, 0, 1).float()
         sig = torch.stft(sig, self.chunk_len, self.stride, window=self.hann, return_complex=False).permute(2, 0, 1).float()
