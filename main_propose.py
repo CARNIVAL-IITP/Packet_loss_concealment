@@ -69,7 +69,6 @@ def train():
                          callbacks=[checkpoint_callback]
                          )
 
-    
 
 def to_onnx(model, onnx_path):
     model.eval()
