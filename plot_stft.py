@@ -298,7 +298,4 @@ def stft4():
     # plt.savefig(outputpath + 'masked.png')
     plt.show()
 
-# stft1()
-# stft2()
-# stft3()
 stft4()
