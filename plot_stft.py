@@ -41,7 +41,7 @@ def plot_waveform_to_numpy(self, y, y_low, y_recon, step):
         #            vmax=0.,
         #            aspect='auto',
         #            origin='lower',
-        #            interpolation='none')
+
 
       
       
