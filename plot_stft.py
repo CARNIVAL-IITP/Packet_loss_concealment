@@ -182,8 +182,7 @@ def stft3():
 
   
     
-    # log_spectrogram = librosa.amplitude_to_db(magnitude, ref=np.max)
-    # librosa.displ
+
 
     # score = pesq(ref, deg, sr)
     # print("PESQ Score is: ", score)
