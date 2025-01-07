@@ -27,7 +27,6 @@ assert args.mode in ['train', 'eval', 'test', 'onnx','gen_test'], "--mode should
 
 
 def resume(train_dataset, val_dataset, version):
-    print("Version", version)
     model_path = os.path.join(CONFIG.LOG.log_dir, 'version_{}/checkpoints/'.format(str(version)))
     config_path = os.path.join(CONFIG.LOG.log_dir, 'version_{}/'.format(str(version)) + 'hparams.yaml')
     model_name = [x for x in os.listdir(model_path) if x.endswith(".ckpt")][0]
