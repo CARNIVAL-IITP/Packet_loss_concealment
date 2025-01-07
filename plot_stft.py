@@ -14,7 +14,7 @@ input_unmasked_path = '/home/donghyun/Research/TUNet/test/version_7/sample_1/'
 input_masked_path = '/home/donghyun/Research/TUNet/test/version_7/sample_1/'
 input_masked_path2 = '/home/donghyun/Research/audio-super-res/data/vctk/VCTK-Corpus/test_single/mask_dental/tfilm_e50/'
 
-## Linux filepath
+##
 # input_unmasked_path = '/home/donghyun/Research/audio-super-res/data/vctk/VCTK-Corpus/test_single/mask_dental/lr_inference2/'
 # input_masked_path = '/home/donghyun/Research/audio-super-res/data/vctk/VCTK-Corpus/test_single/mask_dental/tfilm_mae_e100/inference2/train2_lpf_notched/'
 # input_masked_path2 = '/home/donghyun/Research/audio-super-res/data/vctk/VCTK-Corpus/test_single/mask_dental/tfilm_e50/'
